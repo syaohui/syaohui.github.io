@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Yaohui Shu | Applied Mathematics & Statistics</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg:         #F5F2EC;
+      --bg-card:    #FDFAF5;
+      --ink:        #1C1C2E;
+      --ink-soft:   #4A4A62;
+      --accent:     #B85C2C;
+      --rule:       #D8D3C8;
+      --tag-bg:     #EDE8DF;
+      --mono:       'JetBrains Mono', monospace;
+      --serif:      'Cormorant Garamond', serif;
+      --sans:       'Outfit', sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--ink);
+      font-size: 16px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      pointer-events: none; z-index: 999; opacity: 0.028;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 256px 256px;
+    }
+
+    .container { max-width: 900px; margin: 0 auto; padding: 0 2rem; }
+    section { padding: 5rem 0; }
+    section + section { border-top: 1px solid var(--rule); }
+
+    /* NAV */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(245,242,236,0.88);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--rule);
+    }
+    nav .inner {
+      display: flex; align-items: center; justify-content: space-between;
+      max-width: 900px; margin: 0 auto; padding: 0.9rem 2rem;
+    }
+    nav .logo { font-family: var(--serif); font-size: 1.15rem; font-weight: 500; color: var(--ink); text-decoration: none; }
+    nav ul { display: flex; gap: 2rem; list-style: none; }
+    nav a { font-size: 0.82rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft); text-decoration: none; transition: color 0.2s; }
+    nav a:hover { color: var(--accent); }
+
+    /* HERO */
+    #hero { padding: 6rem 0 5rem; border-top: none; }
+    .hero-grid { display: grid; grid-template-columns: 1fr auto; gap: 3rem; align-items: start; }
+
+    .hero-eyebrow {
+      font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.12em;
+      color: var(--accent); text-transform: uppercase; margin-bottom: 1rem;
+      opacity: 0; animation: fadeUp 0.6s 0.1s forwards;
+    }
+    h1 {
+      font-family: var(--serif); font-size: clamp(2.8rem,6vw,4.2rem);
+      font-weight: 300; line-height: 1.08;
+      opacity: 0; animation: fadeUp 0.6s 0.2s forwards;
+    }
+    h1 em { font-style: italic; color: var(--accent); }
+
+    .hero-research-title {
+      margin-top: 1.5rem;
+      font-family: var(--serif); font-size: 1.18rem;
+      font-weight: 400; font-style: italic; color: var(--ink);
+      line-height: 1.45; max-width: 54ch;
+      opacity: 0; animation: fadeUp 0.6s 0.32s forwards;
+    }
+    .hero-tagline {
+      margin-top: 0.9rem; font-size: 0.95rem; color: var(--ink-soft);
+      max-width: 52ch; font-weight: 300;
+      opacity: 0; animation: fadeUp 0.6s 0.42s forwards;
+    }
+    .hero-affil {
+      margin-top: 1.6rem; display: flex; flex-direction: column; gap: 0.3rem;
+      opacity: 0; animation: fadeUp 0.6s 0.5s forwards;
+    }
+    .affil-item { display: flex; align-items: center; gap: 0.55rem; font-size: 0.88rem; color: var(--ink-soft); }
+    .affil-item::before { content: ''; width: 18px; height: 1px; background: var(--accent); flex-shrink: 0; }
+    .hero-links {
+      margin-top: 2.2rem; display: flex; gap: 1rem; flex-wrap: wrap;
+      opacity: 0; animation: fadeUp 0.6s 0.58s forwards;
+    }
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.45rem;
+      padding: 0.6rem 1.3rem; font-size: 0.82rem; font-weight: 500;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      text-decoration: none; border-radius: 2px; transition: all 0.2s;
+    }
+    .btn-primary { background: var(--ink); color: var(--bg); }
+    .btn-primary:hover { background: var(--accent); }
+    .btn-outline { border: 1px solid var(--rule); color: var(--ink-soft); }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+    .avatar {
+      width: 140px; height: 140px; border-radius: 50%;
+      background: linear-gradient(135deg,#1C1C2E 0%,#2e2e50 100%);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--serif); font-size: 2.8rem; font-weight: 300; color: var(--bg);
+      flex-shrink: 0; box-shadow: 0 8px 32px rgba(28,28,46,0.18);
+      opacity: 0; animation: fadeIn 0.8s 0.2s forwards;
+    }
+
+    /* SECTION HEADERS */
+    .section-label { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.14em; color: var(--accent); text-transform: uppercase; margin-bottom: 0.6rem; }
+    h2 { font-family: var(--serif); font-size: clamp(1.8rem,4vw,2.4rem); font-weight: 400; line-height: 1.15; margin-bottom: 2.5rem; }
+    h2 em { font-style: italic; color: var(--accent); }
+
+    /* ABOUT */
+    .about-body { display: grid; grid-template-columns: 3fr 2fr; gap: 3rem; align-items: start; }
+    .about-text p { font-size: 0.97rem; color: var(--ink-soft); margin-bottom: 1rem; font-weight: 300; }
+    .about-text p strong { color: var(--ink); font-weight: 500; }
+
+    .pillars { display: flex; flex-direction: column; gap: 1px; }
+    .pillar { background: var(--bg-card); border: 1px solid var(--rule); padding: 1.05rem 1.3rem; margin-bottom: 1px; transition: border-color 0.2s; }
+    .pillar:hover { border-color: var(--accent); }
+    .pillar-label { font-family: var(--mono); font-size: 0.66rem; letter-spacing: 0.1em; color: var(--accent); text-transform: uppercase; margin-bottom: 0.2rem; }
+    .pillar-value { font-family: var(--serif); font-size: 0.95rem; font-weight: 500; line-height: 1.3; }
+
+    /* RESEARCH */
+    .research-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    .r-card {
+      background: var(--bg-card); border: 1px solid var(--rule);
+      padding: 1.8rem; border-radius: 2px;
+      transition: border-color 0.25s, box-shadow 0.25s;
+      position: relative; overflow: hidden;
+    }
+    .r-card::before { content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 0; background: var(--accent); transition: height 0.3s ease; }
+    .r-card:hover { border-color: var(--accent); box-shadow: 0 4px 24px rgba(184,92,44,0.08); }
+    .r-card:hover::before { height: 100%; }
+    .r-icon { font-size: 1.4rem; margin-bottom: 0.9rem; }
+    .r-card h3 { font-family: var(--serif); font-size: 1.08rem; font-weight: 500; margin-bottom: 0.6rem; line-height: 1.25; }
+    .r-card p { font-size: 0.87rem; color: var(--ink-soft); font-weight: 300; }
+
+    /* PUBLICATIONS */
+    .pub-list { display: flex; flex-direction: column; gap: 1.5rem; }
+    .pub-item { display: grid; grid-template-columns: auto 1fr; gap: 1.4rem; padding: 1.6rem; background: var(--bg-card); border: 1px solid var(--rule); border-radius: 2px; transition: border-color 0.2s; }
+    .pub-item:hover { border-color: var(--accent); }
+    .pub-year { font-family: var(--mono); font-size: 0.72rem; color: var(--accent); letter-spacing: 0.06em; padding-top: 0.2rem; white-space: nowrap; }
+    .pub-journal { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.08em; color: var(--ink-soft); text-transform: uppercase; margin-bottom: 0.35rem; }
+    .pub-title { font-family: var(--serif); font-size: 1.05rem; font-weight: 500; line-height: 1.3; margin-bottom: 0.4rem; }
+    .pub-authors { font-size: 0.83rem; color: var(--ink-soft); margin-bottom: 0.6rem; font-weight: 300; }
+    .pub-authors strong { color: var(--ink); font-weight: 500; }
+    .pub-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+    .tag { font-family: var(--mono); font-size: 0.68rem; padding: 0.2rem 0.6rem; background: var(--tag-bg); color: var(--ink-soft); border-radius: 2px; letter-spacing: 0.04em; }
+    .tag-status { background: #F0EAE0; color: var(--accent); }
+
+    /* BACKGROUND */
+    .edu-list { display: flex; flex-direction: column; gap: 1.2rem; }
+    .edu-item { display: grid; grid-template-columns: 150px 1fr; gap: 1.4rem; padding: 1.4rem 1.6rem; background: var(--bg-card); border: 1px solid var(--rule); border-radius: 2px; }
+    .edu-period { font-family: var(--mono); font-size: 0.72rem; color: var(--ink-soft); letter-spacing: 0.06em; padding-top: 0.15rem; line-height: 1.5; }
+    .edu-degree { font-family: var(--serif); font-size: 1.05rem; font-weight: 500; line-height: 1.25; }
+    .edu-school { font-size: 0.85rem; color: var(--ink-soft); margin-top: 0.25rem; font-weight: 300; }
+    .edu-note { font-family: var(--mono); font-size: 0.7rem; color: var(--accent); letter-spacing: 0.06em; margin-top: 0.4rem; }
+    .edu-courses { margin-top: 0.5rem; display: flex; gap: 0.4rem; flex-wrap: wrap; }
+
+    /* SKILLS */
+    .skills-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; }
+    .skill-group h3 { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.12em; color: var(--accent); text-transform: uppercase; margin-bottom: 0.9rem; padding-bottom: 0.6rem; border-bottom: 1px solid var(--rule); }
+    .skill-group ul { list-style: none; }
+    .skill-group li { font-size: 0.88rem; color: var(--ink-soft); padding: 0.25rem 0; font-weight: 300; display: flex; align-items: center; gap: 0.5rem; }
+    .skill-group li::before { content: '·'; color: var(--accent); font-size: 1.2rem; line-height: 0; }
+
+    /* CONTACT */
+    .contact-inner { display: grid; grid-template-columns: 1fr auto; gap: 3rem; align-items: center; }
+    .contact-text p { font-size: 0.97rem; color: var(--ink-soft); font-weight: 300; max-width: 48ch; }
+    .contact-links { display: flex; flex-direction: column; gap: 0.9rem; }
+    .contact-link { display: flex; align-items: center; gap: 0.8rem; font-size: 0.88rem; color: var(--ink-soft); text-decoration: none; transition: color 0.2s; }
+    .contact-link:hover { color: var(--accent); }
+    .contact-link .cl-icon { width: 32px; height: 32px; border: 1px solid var(--rule); border-radius: 2px; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; background: var(--bg-card); flex-shrink: 0; }
+
+    /* FOOTER */
+    footer { border-top: 1px solid var(--rule); padding: 2rem 0; text-align: center; }
+    footer p { font-family: var(--mono); font-size: 0.7rem; color: var(--ink-soft); letter-spacing: 0.06em; opacity: 0.7; }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp { from { opacity:0; transform:translateY(14px); } to { opacity:1; transform:translateY(0); } }
+    @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+    .reveal { opacity:0; transform:translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity:1; transform:none; }
+
+    /* RESPONSIVE */
+    @media (max-width:720px) {
+      .hero-grid,.about-body,.research-cards,.contact-inner { grid-template-columns:1fr; }
+      .edu-item { grid-template-columns:1fr; }
+      .skills-grid { grid-template-columns:1fr 1fr; }
+      .avatar { width:90px; height:90px; font-size:1.8rem; }
+      nav ul { gap:1.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="inner">
+      <a href="#hero" class="logo">Yaohui Shu</a>
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#research">Research</a></li>
+        <li><a href="#publications">Publications</a></li>
+        <li><a href="#background">Background</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="container">
+      <div class="hero-grid">
+        <div>
+          <p class="hero-eyebrow">PhD Candidate · Applied Mathematics & Statistics</p>
+          <h1>Yaohui<br><em>Shu</em></h1>
+
+          <p class="hero-research-title">
+            Uncovering Causal Mechanisms of Aerosol-Cloud-Turbulence Interactions
+            Using Physics- and Data-Driven Methods
+          </p>
+
+          <p class="hero-tagline">
+            Applied mathematician working at the intersection of stochastic theory,
+            information-theoretic causality, and causal machine learning.
+            The focus is on complex, high-dimensional physical systems.
+          </p>
+
+          <div class="hero-affil">
+            <div class="affil-item">Stony Brook University, Dept. of Applied Mathematics & Statistics</div>
+            <div class="affil-item">Brookhaven National Laboratory</div>
+          </div>
+
+          <div class="hero-links">
+            <a href="Yaohui_Shu_CV.pdf" class="btn btn-primary" target="_blank">↓ Download CV</a>
+            <a href="https://github.com/syaohui/stochastic_condensation_info_flow" class="btn btn-outline" target="_blank">⟨/⟩ GitHub</a>
+            <a href="https://www.linkedin.com/in/yaohui-shu" class="btn btn-outline" target="_blank">in LinkedIn</a>
+          </div>
+        </div>
+        <div class="avatar">YS</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="container">
+      <p class="section-label reveal">Profile</p>
+      <h2 class="reveal">About <em>me</em></h2>
+      <div class="about-body">
+
+        <div class="about-text reveal">
+          <p>
+            I am an applied mathematician and PhD candidate at Stony Brook University.
+            I work jointly with Brookhaven National Laboratory.
+            At the core of my research is a single question:
+            <strong>in systems where many variables interact simultaneously, what actually causes what?</strong>
+            I develop mathematical frameworks rooted in stochastic differential equations,
+            information theory, and causal inference to answer that question rigorously.
+          </p>
+          <p>
+            My current application domain is aerosol-cloud-turbulence interaction.
+            This system is multiscale, non-Gaussian, nonlinear, and scientifically consequential.
+            I chose it not because I am a domain specialist.
+            I chose it because it is an ideal proving ground for <strong>hard mathematical problems</strong>.
+            These include deriving exact steady-state solutions to Fokker-Planck equations,
+            closing moment hierarchies for non-Gaussian distributions,
+            and building information-theoretic estimators that correctly distinguish causation from correlation.
+          </p>
+          <p>
+            The broader ambition is a <strong>unified modeling platform</strong>.
+            In this platform, physics-informed stochastic models, entropy-based causality diagnostics,
+            and doubly robust causal ML reinforce each other.
+            The goal is a framework that applies to any complex system
+            where understanding mechanism matters as much as prediction.
+          </p>
+          <p>
+            My background spans applied mathematics, quantitative finance, and scientific computing.
+            I hold an MS in Finance from the University of Rochester and the Certificate in Quantitative Finance (CQF).
+            This cross-disciplinary training gives me a broad toolkit for problems
+            where theory, computation, and data must work together.
+          </p>
+        </div>
+
+        <div class="reveal">
+          <div class="pillars">
+            <div class="pillar">
+              <div class="pillar-label">Core methodology</div>
+              <div class="pillar-value">Stochastic differential equations &amp; Fokker-Planck theory</div>
+            </div>
+            <div class="pillar">
+              <div class="pillar-label">Causality framework</div>
+              <div class="pillar-value">Information-flow, transfer entropy &amp; causal graph learning</div>
+            </div>
+            <div class="pillar">
+              <div class="pillar-label">Data-driven layer</div>
+              <div class="pillar-value">Doubly robust ML — TMLE, AIPW, DML</div>
+            </div>
+            <div class="pillar">
+              <div class="pillar-label">Application domain</div>
+              <div class="pillar-value">Aerosol-cloud-turbulence interactions</div>
+            </div>
+            <div class="pillar">
+              <div class="pillar-label">Publications</div>
+              <div class="pillar-value">3 manuscripts in submission (GRL, JAS, PRE)</div>
+            </div>
+            <div class="pillar">
+              <div class="pillar-label">PhD status</div>
+              <div class="pillar-value">Advanced to candidacy · Expected May 2027</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- RESEARCH -->
+  <section id="research">
+    <div class="container">
+      <p class="section-label reveal">Focus Areas</p>
+      <h2 class="reveal">Research <em>directions</em></h2>
+      <div class="research-cards">
+
+        <div class="r-card reveal">
+          <div class="r-icon">⟡</div>
+          <h3>Physics-Informed Stochastic Modeling</h3>
+          <p>I construct minimal, analytically tractable stochastic models using Langevin
+          equations and Fokker-Planck theory. The goal is to retain only what is essential.
+          From there, I derive exact solutions, moment equations, and steady-state distributions
+          that reveal the underlying physics without numerical black boxes.</p>
+        </div>
+
+        <div class="r-card reveal">
+          <div class="r-icon">⟐</div>
+          <h3>Information-Theoretic Causality</h3>
+          <p>I develop time-resolved, ensemble-based estimators grounded in Liang's
+          information-flow formalism. These estimators quantify the <em>direction</em> and
+          <em>magnitude</em> of causal influence between coupled variables. The approach
+          goes beyond correlation and enables falsifiable causal claims from model output.</p>
+        </div>
+
+        <div class="r-card reveal">
+          <div class="r-icon">⊕</div>
+          <h3>Moment-Closure &amp; Bidirectional Feedback</h3>
+          <p>I extend one-way stochastic systems to bidirectional causal equations that
+          explicitly resolve feedback loops. I also develop Gamma and Weibull moment-closure
+          strategies. These strategies keep high-dimensional distributional dynamics
+          analytically tractable and physically interpretable.</p>
+        </div>
+
+        <div class="r-card reveal">
+          <div class="r-icon">⋈</div>
+          <h3>Integrated Physics &amp; Causal ML</h3>
+          <p>I connect physics-based stochastic models with state-of-the-art causal ML.
+          This includes doubly robust estimators, nonlinear transfer entropy, and graph
+          structure learning. Physics-derived priors guide data-driven discovery.
+          Learned causal graphs in turn refine the stochastic model structure.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- PUBLICATIONS -->
+  <section id="publications">
+    <div class="container">
+      <p class="section-label reveal">Papers</p>
+      <h2 class="reveal"><em>Publications</em> &amp; preprints</h2>
+      <div class="pub-list">
+
+        <div class="pub-item reveal">
+          <div class="pub-year">2026</div>
+          <div>
+            <p class="pub-journal">Geophysical Research Letters · AGU</p>
+            <p class="pub-title">Stochastic Condensation with Information Flow for Causality Analysis</p>
+            <p class="pub-authors"><strong>Yaohui Shu</strong>, Yangang Liu, Tao Zhang, Robert McGraw, Xiaolin Li</p>
+            <div class="pub-tags">
+              <span class="tag tag-status">Submitted</span>
+              <span class="tag">Ornstein-Uhlenbeck</span>
+              <span class="tag">Information Flow</span>
+              <span class="tag">Causal Discovery</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="pub-item reveal">
+          <div class="pub-year">2026</div>
+          <div>
+            <p class="pub-journal">Journal of the Atmospheric Sciences · AGU</p>
+            <p class="pub-title">A New Stochastic Condensation Model for Investigating Turbulent Entrainment-Mixing Processes</p>
+            <p class="pub-authors"><strong>Yaohui Shu</strong> et al.</p>
+            <div class="pub-tags">
+              <span class="tag tag-status">Under Submission</span>
+              <span class="tag">Langevin Equations</span>
+              <span class="tag">Monte Carlo</span>
+              <span class="tag">Turbulence</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="pub-item reveal">
+          <div class="pub-year">2026</div>
+          <div>
+            <p class="pub-journal">Physical Review E · APS</p>
+            <p class="pub-title">A Langevin-Type Stochastic Condensation Model Based on the Maximum Entropy Principle</p>
+            <p class="pub-authors"><strong>Yaohui Shu</strong> et al.</p>
+            <div class="pub-tags">
+              <span class="tag tag-status">Under Submission</span>
+              <span class="tag">Maximum Entropy</span>
+              <span class="tag">Fokker-Planck</span>
+              <span class="tag">Weibull Distribution</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- BACKGROUND -->
+  <section id="background">
+    <div class="container">
+      <p class="section-label reveal">Education &amp; Training</p>
+      <h2 class="reveal">Academic <em>background</em></h2>
+
+      <div class="edu-list">
+
+        <div class="edu-item reveal">
+          <div class="edu-period">2023 – 2027<br>(expected)</div>
+          <div>
+            <div class="edu-degree">Doctor of Philosophy — Applied Mathematics &amp; Statistics</div>
+            <div class="edu-school">Stony Brook University &amp; Brookhaven National Laboratory</div>
+            <div class="edu-note">Advanced to PhD Candidacy · Fall 2025</div>
+            <div class="edu-courses">
+              <span class="tag">Advanced Stochastic Models</span>
+              <span class="tag">Differential Equations I &amp; II</span>
+              <span class="tag">Numerical Analysis I–III</span>
+              <span class="tag">Parallel Computing</span>
+              <span class="tag">Complex Analysis</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="edu-item reveal">
+          <div class="edu-period">2022 – 2023</div>
+          <div>
+            <div class="edu-degree">Master of Science — Applied Mathematics &amp; Statistics</div>
+            <div class="edu-school">Stony Brook University</div>
+            <div class="edu-courses">
+              <span class="tag">Probability</span>
+              <span class="tag">Stochastic Calculus</span>
+              <span class="tag">Capital Markets &amp; Portfolio Theory</span>
+              <span class="tag">Quantitative Risk Management</span>
+              <span class="tag">High-Frequency Trading Math</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="edu-item reveal">
+          <div class="edu-period">2021 – 2022</div>
+          <div>
+            <div class="edu-degree">Master of Science — Finance</div>
+            <div class="edu-school">University of Rochester</div>
+          </div>
+        </div>
+
+        <div class="edu-item reveal">
+          <div class="edu-period">Professional</div>
+          <div>
+            <div class="edu-degree">Certificate in Quantitative Finance (CQF)</div>
+            <div class="edu-school">CQF Institute</div>
+            <div class="edu-note">Deep learning, feature engineering, systematic ML workflow design</div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Skills -->
+      <div style="margin-top: 3.5rem;">
+        <p class="section-label reveal" style="margin-bottom:1.5rem;">Technical skills</p>
+        <div class="skills-grid">
+
+          <div class="skill-group reveal">
+            <h3>Mathematical Modeling</h3>
+            <ul>
+              <li>SDEs &amp; Fokker-Planck equations</li>
+              <li>Monte Carlo simulation</li>
+              <li>Moment-closure methods</li>
+              <li>Asymptotic &amp; perturbation analysis</li>
+              <li>Numerical PDE solvers</li>
+            </ul>
+          </div>
+
+          <div class="skill-group reveal">
+            <h3>Causality &amp; Inference</h3>
+            <ul>
+              <li>Liang information-flow framework</li>
+              <li>Transfer entropy (k-NN estimators)</li>
+              <li>Doubly robust estimators (TMLE, AIPW, DML)</li>
+              <li>Causal graph structure learning</li>
+              <li>Ensemble-based OLS regression</li>
+            </ul>
+          </div>
+
+          <div class="skill-group reveal">
+            <h3>Computing &amp; ML</h3>
+            <ul>
+              <li>Python (NumPy, SciPy, Pandas, Matplotlib)</li>
+              <li>HPC / SLURM parallel workflows</li>
+              <li>TensorFlow, XGBoost, PCA</li>
+              <li>MATLAB, C++, R</li>
+              <li>Reproducible research pipelines</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="container">
+      <p class="section-label reveal">Get in touch</p>
+      <h2 class="reveal"><em>Contact</em></h2>
+      <div class="contact-inner">
+        <div class="contact-text reveal">
+          <p>
+            I welcome conversations on stochastic modeling, causal inference,
+            and mathematical methods for complex systems.
+            I am open to academic and applied research collaborations.
+            Feel free to reach out via email or connect on LinkedIn.
+          </p>
+        </div>
+        <div class="contact-links reveal">
+          <a href="mailto:yaohui.shu@stonybrook.edu" class="contact-link">
+            <span class="cl-icon">✉</span> yaohui.shu@stonybrook.edu
+          </a>
+          <a href="mailto:yaohui.research@gmail.com" class="contact-link">
+            <span class="cl-icon">✉</span> yaohui.research@gmail.com
+          </a>
+          <a href="https://github.com/syaohui" class="contact-link" target="_blank">
+            <span class="cl-icon">⟨⟩</span> github.com/syaohui
+          </a>
+          <a href="https://www.linkedin.com/in/yaohui-shu" class="contact-link" target="_blank">
+            <span class="cl-icon">in</span> linkedin.com/in/yaohui-shu
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>© 2026 Yaohui Shu · Stony Brook University · Brookhaven National Laboratory</p>
+    </div>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver(
+      entries => entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+      }),
+      { threshold: 0.12 }
+    );
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
