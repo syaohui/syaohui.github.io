@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Research | Yaohui Shu</title>
+  <meta name="description" content="Research topics of Yaohui Shu: stochastic condensation, information flow, maximum entropy, entrainment-mixing, and causal discovery." />
+  <meta name="color-scheme" content="light dark" />
+  <link rel="preload" href="fonts/lmroman10-regular.woff" as="font" type="font/woff" crossorigin />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="page">
+
+    <aside class="menu" aria-label="Site menu">
+      <p class="who"><a href="index.html">Yaohui Shu</a></p>
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="bio.html">Bio</a></li>
+        </ul>
+        <h4>Research</h4>
+        <ul>
+          <li><a href="research.html" aria-current="page">Topics</a></li>
+          <li><a href="publications.html">Publications</a></li>
+          <li><a href="talks.html">Talks</a></li>
+        </ul>
+        <h4>Teaching</h4>
+        <ul>
+          <li><a href="teaching.html">Courses</a></li>
+        </ul>
+        <h4>Documents</h4>
+        <ul>
+          <li><a class="ext" href="Yaohui_Shu_CV.pdf" target="_blank" rel="noopener">CV</a></li>
+          <li><a class="ext" href="Yaohui_Shu_Resume.pdf" target="_blank" rel="noopener">Resume</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <main class="sheet">
+      <div class="content">
+        <header class="title">
+          <h1>Research Topics</h1>
+          <div class="rules" aria-hidden="true"></div>
+        <p class="updated">Updated September 2026</p>
+        </header>
+
+        <p class="note">Full publication list on <a href="https://scholar.google.com/citations?user=wj_oSu0AAAAJ&amp;hl=en" target="_blank" rel="noopener">Google Scholar</a> and <a href="publications.html">the publications page</a>.</p>
+        <p><span class="runin">Research summary.</span>
+          My research studies turbulence-microphysics interactions in clouds with the tools of stochastic analysis and
+          statistical inference. Droplets grow and evaporate in a supersaturation field that fluctuates with finite
+          memory, and those fluctuations broaden the droplet size distribution. I ask how the memory and intensity of
+          the fluctuations set that broadening, how to write minimal models that can be solved or simulated with
+          controlled error, and how to measure what causes what in systems where the variables feed back on each other.
+        </p>
+
+        <section>
+          <h2>Stochastic condensation with finite-memory fluctuations</h2>
+          <p>
+            The McGraw-Liu drift-diffusion model treats saturation fluctuations as white noise, which holds only when
+            they decorrelate quickly. Replacing that noise with an Ornstein-Uhlenbeck process for the saturation ratio
+            gives a coupled Langevin system that covers the full range of correlation times and recovers the white-noise
+            model as a limit. Monte Carlo ensembles of 10<sup>5</sup> droplets show that spectral broadening grows with
+            both the correlation time and the intensity of the fluctuations.
+          </p>
+          <p class="related-label">Related</p>
+          <ul class="related">
+            <li><a href="https://doi.org/10.1029/2026GL123056" target="_blank" rel="noopener">Stochastic condensation with information flow for causality analysis</a>, <em>Geophysical Research Letters</em>, 2026.</li>
+            <li><a href="https://ui.adsabs.harvard.edu/abs/2025AGUFMA21B.2034S/abstract" target="_blank" rel="noopener">Stochastic condensation/evaporation with different physical constraints and information flow for causal discovery</a>, AGU Fall Meeting, 2025.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Information flow and causality in stochastic models</h2>
+          <p>
+            Building the Liang-Kleeman information-flow formalism into the condensation model gives a closed form for the
+            rate at which saturation fluctuations inform droplet size, together with its white-noise and frozen-noise
+            limits. An ensemble estimator that uses covariances across droplets at each instant reproduces the analytical
+            flow, stays near zero in the reverse direction, and identifies a causal direction that the symmetric
+            correlation coefficient cannot. The causal coupling weakens as the size distribution broadens.
+          </p>
+          <p class="related-label">Related</p>
+          <ul class="related">
+            <li><a href="https://doi.org/10.1029/2026GL123056" target="_blank" rel="noopener">Stochastic condensation with information flow for causality analysis</a>, <em>Geophysical Research Letters</em>, 2026. <span class="x"><a href="https://github.com/syaohui/stochastic_condensation_info_flow" target="_blank" rel="noopener"><span>code</span></a></span></li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Maximum entropy and Langevin dynamics of droplet spectra</h2>
+          <p>
+            Maximum-entropy systems theory and Langevin stochastic condensation, applied to the same conservation
+            constraint, predict Weibull spectra of different orders. The difference comes from the choice of size
+            variable. Generalizing the Langevin model to any conserved moment order needs one hypothesis, that each
+            droplet exchanges the conserved budget at a size-independent rate, and Monte Carlo runs for orders 1 to 6
+            reproduce the predicted narrowing of the spectrum.
+          </p>
+          <p class="related-label">Related</p>
+          <ul class="related">
+            <li>Stochastic condensation and the maximum entropy cloud droplet spectrum: The order of the conserved moment. In preparation for <em>Physical Review E</em>.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Entrainment-mixing</h2>
+          <p>
+            Dry air entrained into a cloud reduces droplet number, liquid water, or both, depending on how fast mixing is
+            compared with evaporation. A stochastic condensation model with explicit homogeneous and extreme-inhomogeneous
+            mixing pathways, and a scheme that moves continuously between them, provides a benchmark for
+            entrainment-mixing parameterizations.
+          </p>
+          <p class="related-label">Related</p>
+          <ul class="related">
+            <li>A new stochastic condensation model for investigating turbulent entrainment-mixing processes. In preparation for <em>Journal of the Atmospheric Sciences</em>.</li>
+            <li><a href="https://ams.confex.com/ams/106ANNUAL/meetingapp.cgi/Paper/468828" target="_blank" rel="noopener">A new generalized stochastic model and impacts of microphysical fluctuations</a>, 106th AMS Annual Meeting, 2026.</li>
+            <li><a href="https://ui.adsabs.harvard.edu/abs/2025AGUFMA21B..203L/abstract" target="_blank" rel="noopener">Relationship between turbulent entrainment-mixing and droplet clustering</a>, AGU Fall Meeting, 2025.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Causal discovery with feedback and unobserved drivers</h2>
+          <p>
+            Standard causal discovery assumes an acyclic graph and that every common cause is measured, and turbulent
+            clouds violate both. This methodology targets partial ancestral graphs over a lag window under
+            sigma-separation, uses nearest-neighbor conditional mutual information tests, and separates nonlinearity from
+            nonstationarity with surrogate-calibrated diagnostics. For causal strength it proposes the relative entropy
+            rate between path measures with one drift dependence removed, which has a closed form by Girsanov's theorem.
+          </p>
+          <p class="related-label">Related</p>
+          <ul class="related">
+            <li>Entropy-based causal discovery for spatiotemporal dynamical systems with feedback and unmeasured drivers. Methodology working paper.</li>
+          </ul>
+        </section>
+      </div>
+
+      <footer>
+        <span>Last updated September 2026</span>
+        <span>Set in Latin Modern, the typeface of <span class="latex">L<sup>a</sup>T<sub>e</sub>X</span></span>
+      </footer>
+    </main>
+  </div>
+  <script src="site.js"></script>
+</body>
+</html>
