@@ -71,12 +71,12 @@ a:hover { text-decoration: underline; text-decoration-thickness: 1px; text-under
 .menu .who { font-family: var(--serif); font-size: 1.2rem; margin: 0 0 0.6rem; letter-spacing: 0; }
 .menu .who a { color: var(--ink); }
 .menu .who a:hover { text-decoration: none; }
-.menu h4 { font-family: var(--caps); font-weight: 400; font-size: 0.9rem; letter-spacing: 0.04em; color: var(--muted); margin: 1.1rem 0 0.3rem; padding-bottom: 0.2rem; border-bottom: 0.5px solid var(--hair); }
+.menu h4 { font-family: var(--serif); font-weight: 400; font-size: 0.95rem; letter-spacing: 0; color: var(--muted); margin: 1.1rem 0 0.3rem; padding-bottom: 0.2rem; border-bottom: 0.5px solid var(--hair); }
 .menu ul { list-style: none; margin: 0; padding: 0; }
 .menu li a { display: block; padding: 0.12rem 0 0.12rem 0.75rem; color: var(--ink); border-left: 1.5px solid transparent; }
 .menu li a:hover { color: var(--link); text-decoration: none; }
 .menu li a[aria-current="page"] { border-left-color: var(--mark); color: var(--mark); }
-.menu .ext::after { content: 'pdf'; font-family: var(--caps); font-size: 0.78em; letter-spacing: 0.04em; color: var(--muted); margin-left: 0.4em; }
+.menu .ext::after { content: '(pdf)'; font-family: var(--serif); font-size: 0.85em; letter-spacing: 0; color: var(--muted); margin-left: 0.35em; }
 
 /* SHEET */
 .sheet {
