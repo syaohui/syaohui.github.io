@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Research | Yaohui Shu</title>
-  <meta name="description" content="Research topics of Yaohui Shu: stochastic condensation, information flow, maximum entropy, entrainment-mixing, and causal discovery." />
+  <meta name="description" content="Research topics of Yaohui Shu: stochastic condensation, information flow, maximum entropy, entrainment-mixing, causal discovery, causal learning on turbulence simulations, and AI agents for simulation." />
   <meta name="color-scheme" content="light dark" />
   <link rel="preload" href="fonts/lmroman10-regular.woff" as="font" type="font/woff" crossorigin />
   <link rel="stylesheet" href="style.css" />
@@ -42,7 +42,7 @@
         <header class="title">
           <h1>Research Topics</h1>
           <div class="rules" aria-hidden="true"></div>
-        <p class="updated">Updated September 2026</p>
+        <p class="updated">Updated October 2026</p>
         </header>
 
         <p class="note">Full publication list on <a href="https://scholar.google.com/citations?user=wj_oSu0AAAAJ&amp;hl=en" target="_blank" rel="noopener">Google Scholar</a> and <a href="publications.html">the publications page</a>.</p>
@@ -52,6 +52,7 @@
           memory, and those fluctuations broaden the droplet size distribution. I ask how the memory and intensity of
           the fluctuations set that broadening, how to write minimal models that can be solved or simulated with
           controlled error, and how to measure what causes what in systems where the variables feed back on each other.
+          Newer work carries these questions to turbulence simulations and to AI agents that design and check them.
         </p>
 
         <section>
@@ -128,6 +129,36 @@
           <p class="related-label">Related</p>
           <ul class="related">
             <li>Entropy-based causal discovery for spatiotemporal dynamical systems with feedback and unmeasured drivers. Methodology working paper.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Causal learning on turbulence simulations</h2>
+          <p>
+            Small random perturbations added to a turbulence simulation turn one run into many randomized experiments,
+            so cause and effect can be estimated the way a controlled trial estimates a treatment effect. The data come
+            from pseudo-spectral Navier-Stokes solvers for 2D and 3D turbulence and convection, checked against exact
+            solutions and linear stability theory. On 2D turbulence the method labeled all 16 causal links correctly,
+            and its confidence intervals held the true effect in 127 of 128 tests.
+          </p>
+          <p class="related-label">Related</p>
+          <ul class="related">
+            <li>Causal learning on turbulence simulations. In preparation for ICML 2027.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>AI agents for simulation-driven discovery</h2>
+          <p>
+            Large fluid simulations are expensive, and the hard part is telling real physical effects from numerical or
+            statistical artifacts. I am building an LLM-based AI agent for two-fluid flow simulations with the FronTier
+            solver. It proposes hypotheses, ranks candidate runs by expected information per unit of compute, and
+            revises its explanation when a forecast fails. Its verification controller reached 0.02% error on a
+            Taylor-Green test case with a known answer.
+          </p>
+          <p class="related-label">Related</p>
+          <ul class="related">
+            <li>An LLM-based AI agent for diagnostic experiment design in fluid simulations. In preparation for ICML 2027.</li>
           </ul>
         </section>
       </div>
